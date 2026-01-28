@@ -8,10 +8,10 @@ class circle:public geometrical_figure
 private:
 	double radius;
 public:
-	circle(const string, const double, const coordinates, const double);
-	circle();
-	~circle();
-	void show() const;
+	circle(const std::string& cur_type, double cur_area, const coordinates& cur_center, double cur_rad);
+	circle() = default;
+	~circle() override = default;
+	void show() const override;
 };
 
 #endif

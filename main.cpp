@@ -1,64 +1,74 @@
 #include "circle.h"
 #include "square.h"
 
+#include <cmath>
+#include <iostream>
+#include <memory>
+#include <vector>
+
 const double PI = 3.14159265;
 
-void choice(geometrical_figure *arr_ptr[], int n)
+std::unique_ptr<geometrical_figure> create_figure()
 {
-	double area, length, radius;
+	double area = 0.0;
+	double length = 0.0;
+	double radius = 0.0;
 	coordinates center;
-	int key;
-	for (int i = 0; i < n;)
+	int key = 0;
+	while (true)
 	{
-		cout << "Square(1) or circle(2): ";
-		cin >> key;
-		cout << endl;
+		std::cout << "Square(1) or circle(2): ";
+		std::cin >> key;
+		std::cout << std::endl;
 		switch (key)
 		{
 		case 1:
 		{
-			cout << "Enter the length of the side of the square: ";
-			cin >> length;
-			cout << "Enter the coordinates of center: " << endl;
-			cout << "x: ";
-			cin >> center.x;
-			cout << "y: ";
-			cin >> center.y;
-			area = pow(length, 2);
-			arr_ptr[i] = new square("Square", area, center, length);
-			i++;
-			break;
+			std::cout << "Enter the length of the side of the square: ";
+			std::cin >> length;
+			std::cout << "Enter the coordinates of center: " << std::endl;
+			std::cout << "x: ";
+			std::cin >> center.x;
+			std::cout << "y: ";
+			std::cin >> center.y;
+			area = std::pow(length, 2);
+			return std::make_unique<square>("Square", area, center, length);
 		}
 		case 2:
 		{
-			cout << "Enter the radius of the circle: ";
-			cin >> radius;
-			cout << "Enter the coordinates of center: " << endl;
-			cout << "x: ";
-			cin >> center.x;
-			cout << "y: ";
-			cin >> center.y;
-			area = PI*pow(radius, 2);
-			arr_ptr[i] = new circle("Circle", area, center, radius);
-			i++;
-			break;
+			std::cout << "Enter the radius of the circle: ";
+			std::cin >> radius;
+			std::cout << "Enter the coordinates of center: " << std::endl;
+			std::cout << "x: ";
+			std::cin >> center.x;
+			std::cout << "y: ";
+			std::cin >> center.y;
+			area = PI * std::pow(radius, 2);
+			return std::make_unique<circle>("Circle", area, center, radius);
 		}
 		default:
 		{
-			cout << "Try again" << endl;
+			std::cout << "Try again" << std::endl;
 			break;
 		}
 		}
-		cout << endl;
+		std::cout << std::endl;
 	}
-	cout << endl;
 }
 
-void main()
+int main()
 {
 	const int n = 2;
-	geometrical_figure *arr_ptr[n];
-	choice(arr_ptr, n);
-	for (int i = 0; i < n; i++)
-		arr_ptr[i]->show();
+	std::vector<std::unique_ptr<geometrical_figure>> figures;
+	figures.reserve(n);
+	for (int i = 0; i < n; ++i)
+	{
+		figures.push_back(create_figure());
+	}
+
+	for (const auto& figure : figures)
+	{
+		figure->show();
+	}
+	return 0;
 }
