@@ -8,10 +8,10 @@ class square:public geometrical_figure
 private:
 	double length;
 public:
-	square(const string, const double, const coordinates, const double);
-	square();
-	~square();
-	void show() const;
+	square(const std::string& cur_type, double cur_area, const coordinates& cur_center, double cur_len);
+	square() = default;
+	~square() override = default;
+	void show() const override;
 };
 
 #endif 

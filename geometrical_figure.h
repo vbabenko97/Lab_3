@@ -2,8 +2,6 @@
 #define geometrical_figure_h
 
 #include <string>
-#include <iostream>
-using namespace std;
 
 struct coordinates
 {
@@ -14,13 +12,13 @@ struct coordinates
 class geometrical_figure
 {
 protected:
-	string type;
+	std::string type;
 	double area;
 	coordinates center;
 public:
-	geometrical_figure(const string, const double, const coordinates);
-	geometrical_figure();	
-	virtual ~geometrical_figure();
+	geometrical_figure(const std::string& cur_type, double cur_area, const coordinates& cur_center);
+	geometrical_figure() = default;
+	virtual ~geometrical_figure() = default;
 	virtual void show() const;
 };
 
