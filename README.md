@@ -1,4 +1,4 @@
-# Lab_3
+# Lab 3
 
 ## Overview
 Small C++ console program that creates a square or circle based on user input and prints the resulting areas and center coordinates.
